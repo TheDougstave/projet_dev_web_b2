@@ -1,1 +1,12 @@
-<h1>Bonjour {{name}}</h1>
+{% extends "base_auth.html.twig" %}
+
+
+{% block title %} {#faut mettre le code la dedans car c'est en gros le body géré par twig#}
+    <h1> Connexion </h1>
+
+    <h1>Bonjour {{name}}</h1> {#à supprimer, c'est juste pour voir comment passer les var d'un fichier à un autr#}
+    <p>
+        <a href="register.php">Pas encore de compte ?</a>
+    </p>
+
+{% endblock %}
