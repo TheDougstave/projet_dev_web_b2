@@ -42,3 +42,4 @@ class Page
         return $this->twig->render($name, $data);
     }
 }
+

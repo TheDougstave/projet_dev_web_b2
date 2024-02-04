@@ -1,30 +1,38 @@
 <?php
 
-    require_once '../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
-    use App\Page;
-    
-    $twig = new Page();
+use App\Page;
 
+$twig = new Page();
+$msg = ''; // Assurez-vous que $msg est défini avant l'utilisation
 
+if (isset($_POST['send'])) {
+    var_dump($_POST);
 
-    if(isset($_POST['send'])){
-        var_dump($_POST);
+    $user = $twig->getUserbyEmail([
+        'email' => $_POST['email']
+    ]);
 
-        $user = $page->getUserbyEmail([
-            'email'=> $_POST['email']
-        ]);
-        var_dump($user);
-        if(!$user){
-            $msg ="mauvais mdp ou email";
-        }else{
-            if(!password_verify($_POST["password"], $user["password"])){
-                $msg = "mauvais mdp ou email";
-            }else{
-                //on se co a la page de profile et on affiche l'email
-            }
+    var_dump($user);
+
+    if (!$user) {
+        $msg = "mauvais mdp ou email";
+    } else {
+        if (!password_verify($_POST["password"], $user["password"])) {
+            $msg = "mauvais mdp ou email";
+        } else {
+            // on se connecte à la page de profile et on affiche l'email
+            session_start();
+
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_email'] = $user['email'];
+
+            header("Location: profile.php");
+            exit();
         }
     }
-    echo $twig->render('index.html.twig', [
-        'msg' => $msg
-    ]);
+}
+
+header("Location: accueil.html.twig");
+exit();
