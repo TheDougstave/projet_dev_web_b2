@@ -34,5 +34,5 @@ if (isset($_POST['send'])) {
     }
 }
 
-header("Location: accueil.html.twig");
-exit();
+//header("Location: accueil.html.twig");
+//exit();
