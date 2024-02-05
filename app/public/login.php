@@ -29,7 +29,6 @@ use App\Page;
 $page = new Page();
 $msg = false;
 
-
 if(isset($_POST['send'])){
     $user = $page->getUserByEmail([
         'email' => $_POST['email']
@@ -43,16 +42,11 @@ if(isset($_POST['send'])){
             $msg = "mauvais mot de passe ";
         }
         else{
-            $page->$session->add('user',$user);
+            $page->Session->add('user',$user);
             header('Location: profile.php');
         }
     }
 }
-
-
-
-
-
 echo $page->render('login.html.twig',[
     'msg' => $msg
 ]);
