@@ -7,5 +7,4 @@
     $page = new Page();
     $msg = false;
 
-
     Header("Location: login.php");
