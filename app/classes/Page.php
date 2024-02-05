@@ -8,7 +8,8 @@ class Page
     private $link;
 
     function __construct()
-    {
+    {   
+        $session = new Session();
         $loader = new \Twig\Loader\FilesystemLoader('../templates');
         $this->twig = new \Twig\Environment($loader, [
             'cache' => '../var/cache/compilation_cache',
