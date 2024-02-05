@@ -43,7 +43,7 @@ if(isset($_POST['send'])){
             $msg = "mauvais mot de passe ";
         }
         else{
-            $page->session->add('user',$user);
+            $page->$session->add('user',$user);
             header('Location: profile.php');
         }
     }
