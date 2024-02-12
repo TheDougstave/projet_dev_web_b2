@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 class Session 
 {
     function __construct()
@@ -12,6 +13,7 @@ class Session
         $_SESSION[$key] = $data;
     }
     public function get(string $key)
+    
     {
         return isset($_SESSION[$key]);
     }

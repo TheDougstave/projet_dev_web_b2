@@ -7,5 +7,4 @@
     $page = new Page();
     $msg = false;
 
-
-    header("Location: login.php");
+    Header("Location: login.php");
