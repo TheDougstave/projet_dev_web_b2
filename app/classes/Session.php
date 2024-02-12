@@ -13,7 +13,7 @@ class Session
     }
     public function get(string $key)
     {
-        return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
+        return isset($_SESSION[$key]);
     }
 
     public function isConnected(){
