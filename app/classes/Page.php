@@ -25,7 +25,7 @@ class Page
     }
 
     public function insert(string $table_name, array $data){
-        $sql = 'INSERT INTO ' . $table_name . ' (email,password) VALUES (:email, :password)';
+        $sql = 'INSERT INTO ' . $table_name . ' (email,password,role) VALUES (:email, :password, :role)';
         $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
         $sth->execute($data);
     }

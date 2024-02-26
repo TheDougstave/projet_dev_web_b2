@@ -7,12 +7,13 @@
     $page = new Page();
 
     if(isset($_POST['send'])){
-        var_dump($_POST);
+        //var_dump($_POST);
    
         
         $page->insert('users', [
             'email' => $_POST["email"],
-            'password' => password_hash($_POST["password"],PASSWORD_BCRYPT)
+            'password' => password_hash($_POST["password"],PASSWORD_BCRYPT),
+            'role' => 0 //le role 0 c'est un user basique
         ]);
     }
 
