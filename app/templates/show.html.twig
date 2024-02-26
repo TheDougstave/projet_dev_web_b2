@@ -1,0 +1,56 @@
+{% extends "base_auth.html.twig" %}
+{% block title %}
+	<div class="overlay">
+	    <header>
+	        <!--logo-->
+	        <div style="width: 180px; height: 180px; position: relative; border-radius: 30px;">
+	          <div class="blob" style="left: 95.57px; top: 85.65px;"></div><!-- milieu-->
+	          <div class="blob" style="left: 95.55px; top: 122.36px;"></div><!-- en bas-->
+	          <div class="blob" style="left: 127.98px; top: 85.65px;"></div><!-- a droite -->
+	          <div class="blob" style="left: 95.57px; top: 48.45px;"></div><!-- en haut-->
+	          <div class="blob" style="left: 62.90px; top: 84.62px;"></div><!-- a gauche -->
+	          <div class="blob" style="left: 112.11px; top: 67.39px;"></div><!-- en haut, a droite-->
+	          <div class="blob" style="left: 78.65px; top: 66.33px;"></div><!-- en haut, a gauche-->
+	          <div class="blob" style="left: 112.11px; top: 104.59px;"></div><!-- en bas, a droite-->
+	          <div class="blob" style="left: 78.65px; top: 104.59px;"></div><!-- en bas, a gauche-->
+	          <h class="vertical-center" style="left: 167px">ACCORD<br>ENERGIE</h>
+	          <div class="vertical-center separation"></div>
+	          <h class="vertical-center" style="left: 350px; color: lightgrey; font-size: 48px; font-family: Jost; font-weight: 500;">Interventions</h>
+	        </div>
+	    </header><br><br><br><br>
+	    <div class="overlayInter" style="margin: 20px; padding: 20px;">
+	    	<section class="row" style="margin: 15px;">
+	    		<div class="blockInter2">
+	    			<div class="interEtiquette">
+	    				<p class="texte" style="left: 40px; top: 10px;">Nom:</p>
+	    				<div class="ligne" style="left: 290px; top: 10px;"></div>
+	    				<p class="texte" style="left: 311px; top: 10px;">Intervenants:</p>
+	    				<div class="ligne" style="left: 612px; top: 10px;"></div>
+	    				<p class="texte" style="left: 629px; top: 10px;">Type d’intervention:</p>
+	    				<div class="ligne" style="left: 987px; top: 10px;"></div>
+	    				<p class="texte" style="left: 1000px; top: 10px;">Date & heure:</p>
+
+	    			</div>
+	    			<div class="ligne2" style="left: 612px;top: 152px;"></div>
+	    			<p class="texte" style="left: 40px; top: 142px; color:#5E5A5A;">Email:</p>
+	    			<p class="texte" style="left: 629px; top: 142px; color:#5E5A5A;">Détails:</p>
+	    			<p class="texte" style="left: 40px; top: 342px; color:#5E5A5A;">Adresse de l'intervention:</p>
+
+	    			<div class="blockTache" style="top: 600px">
+	    				<p class="texte" style="left: 40px; top: 10px">Status:</p>
+	    			</div>
+	    		</div>
+	    	</section>
+	    </div>
+
+	      <p class="texte" style="left: 100px; top: 880px;color:#5E5A5A;">A faire</p>
+		  <p class="texte" style="left: 280px; top: 880px;color:#5E5A5A;">En cours</p>
+		  <p class="texte" style="left: 510px; top: 880px;color:#5E5A5A;">Fait</p>
+
+	      	<div class="statusConteneur"></div>
+	      	<div class="statusLigne" style="left: 322px; top: 919px"></div>
+			<div class="statusLigne" style="left: 529px; top: 919px;"></div>
+			<div class="statusLigne" style="left: 127px; top: 919px;"></div>
+			<div class="statusBoule"></div>
+	</div>
+{% endblock %}
