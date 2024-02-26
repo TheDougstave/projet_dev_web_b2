@@ -1,7 +1,3 @@
-body{
-	background: url('https://wallpapers.com/images/hd/new-york-city-night-iphone-zfu8yaa5fw3vvk0z.jpg');
-}
-
 .overlay {
  position: absolute;
  min-height: 100%;
@@ -11,13 +7,18 @@ body{
  background-color: rgba(0, 0, 0, 0.6);
 }
 
+.overlayInter{
+	background-color: #232323;
+	border-radius: 35px;
+}
+
 header{
 	width: 100%;
 	height: 70px;
 	font-size: 32px;
 	font-family: Reem Kufi;
 	font-weight: 700;
-	color: white
+	color: white;
 }
 
 .blob{
@@ -36,12 +37,66 @@ header{
 	background: white
 }
 
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.separation{
+	width: 5px;
+	height:70px;
+	left:325px;
+	background-color:lightgrey;
+}
+/*Phrase commerciale_________________________________________*/
+.jingle{
+	width: 560px;
+	height: 228px;
+	left: 49px;
+	top: 480px;
+	position: absolute;
+	color: white;
+	font-size: 64px;
+	font-family: Rubik;
+	font-weight: 700;
+	word-wrap: break-word;
+}
+
+.nomPosition{
+	width: 756.65px;
+	height: 310.50px;
+	left:50px;
+	top:100px;
+	position: relative;
+	transform: rotate(8deg);
+	transform-origin: 0 0;
+}
+
+.nom{
+	position: absolute;
+	transform-origin: 0 0;
+	color: white;
+	font-size: 25px;
+	font-family: Varela Round;
+	font-weight: 400;
+	word-wrap: break-word;
+}
+
 /*Block login et enregistrement: ____________________________*/
 .blockPosition{
   margin: auto;
-  width: 50%;
+  left: 50%;
   margin-top: 5%;
   padding: 10px;
+}
+
+.blockPosition2{
+  left: 56%;
+  top: 200px;
+  position: absolute;
 }
 
 .blockEnregistrement{
@@ -51,10 +106,30 @@ header{
 	border-radius: 35px;
 }
 
+.blockEnregistrement2{
+  width: 550px;
+  height: 540px;
+	background: white;
+	border-radius: 35px;
+}
+
+.blockEnregistrement3{
+  width: 100%;
+  height: 740px;
+	background: white;
+	border-radius: 35px;
+}
+
 .blockContenu{
 	padding-top: 5%;
 	padding-left: 15%;
 	padding-right: 15%;
+}
+
+.blockContenu2{
+	padding-top: 5%;
+	padding-left: 8%;
+	padding-right: 8%;
 }
 
 .blockTitre{
@@ -83,6 +158,20 @@ header{
 	border-radius: 30px;
 }
 
+.blockEntree2_1{
+	width: 437px;
+	height: 58px;
+	position: absolute;
+	background-color: #EEEEEE;
+	border-radius: 35px;
+}
+
+.blockEntree2_2{
+	position: absolute;
+	background-color: #EEEEEE;
+	border-radius: 35px;
+}
+
 button{
 	width: 150px;
 	height: 50px;
@@ -95,6 +184,7 @@ button{
 	gap: 8px;
 	display: inline-flex;
 }
+
 .bP{
 	color: white;
 	font-size: 20px;
@@ -102,4 +192,135 @@ button{
 	font-weight: 500;
 	line-height: 20px;
 	word-wrap: break-word;
+}
+/*Block intervention: _______________________________________*/
+.blockContour{
+	background-color: #914D93;
+	margin: 1%;
+	width: 350px;
+	position: relative;
+	border-radius: 35px;
+}
+
+.blockInter{
+	width: 100%;
+	height: 88px;
+	position: relative;
+	border-radius: 35px;
+	border: 2px #F5F5F5 solid;
+}
+
+.blockInter2{
+	width: 100%;
+	height: 855px;
+	position: relative;
+	border-radius: 35px;
+	border: 2px #F5F5F5 solid;
+}
+
+.blockTache{
+	width: 581px;
+	height: 250px;
+	position: absolute;
+	color:#5E5A5A;
+	background-color: #282828;
+	border-bottom-left-radius: 30px;	
+}
+
+.interEtiquette{
+	width: 100%;
+	height: 132px;
+	background-color: white;
+	color: #232323;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+}
+
+.interEtiquetteNom{
+	width: 238px;
+	height: 85px;
+	position: relative;
+	background: white;
+	border-top-left-radius: 30px;
+	border-bottom-left-radius: 30px;
+	font-family: Jost;
+	color: black;
+	font-size: 20px;
+	font-weight: 500;
+	word-wrap: break-word;
+	text-align:center;
+}
+
+.interTitres{
+	text-align: left;
+	color: white;
+	font-size: 20px;
+	font-family: Jost;
+	font-weight: 500;
+	word-wrap: break-word;
+	border-left: 2px solid white;
+}
+
+.ligne{
+	width: 97px;
+	height: 0px;
+	position: absolute;
+	transform: rotate(90deg);
+	transform-origin: 0 0; 
+	border: 1px solid black;
+}
+
+.ligne2{
+	width: 685px;
+	height: 0px;
+	position: absolute;
+	transform: rotate(90deg);
+	transform-origin: 0 0;
+	border: 1px solid #515050;
+}
+
+p.texteAjout{
+	height: 28px;
+	position: absolute;
+	color: black;
+	font-size: 20px;
+	font-family: Jost;
+	font-weight: 500;
+	word-wrap: break-word;
+}
+
+p.texte{
+	height: 28px;
+	position: absolute;
+	font-size: 20px;
+	font-family: Jost;
+	font-weight: 500;
+	word-wrap: break-word;
+}
+/*Status: ___________________________________________________*/
+.statusConteneur{
+	width: 505px;
+	height: 82px;
+	left: 77px;
+	top: 926px;
+	position: absolute;
+	border-radius: 50px;
+	border: 3px solid #515050;
+}
+.statusBoule{
+	width: 65px;
+	height: 65px;
+	left: 94px;
+	top: 934px;
+	position: absolute;
+	background: #D9D9D9;
+	border-radius: 9999px;
+}
+.statusLigne{
+	width: 103px;
+	height: 0px;
+	position: absolute;
+	transform: rotate(90deg);
+	transform-origin: 0 0;
+	border: 1px solid #D9D9D9;
 }
