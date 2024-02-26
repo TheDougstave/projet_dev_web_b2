@@ -1,13 +1,14 @@
 <?php
+require_once '../vendor/autoload.php';
 
+use App\Session;
 
+$session =new Session();
 
+if(!$session->isConnected()){
+    header('Location: login.php');
+    exit();
+}
 
-use App\Page;
-    
-    $page = new Page();
-
-session_destroy();
-
-
-Header("Location : login.php");
+$session->destroy();
+header("Location: login.php");

@@ -26,4 +26,11 @@ class Session
     public function asRole ($role){
         return $_SESSION['user']['role'] == $role ? true : false;
     }
+
+    public function destroy(){
+        session_unset();
+        session_destroy();
+    }
+
+    
 }
