@@ -6,15 +6,16 @@ class Session
 {
     function __construct()
     {
-        session_start();
+        if(session_status()== PHP_SESSION_NONE){
+            session_start();
+        }
+        
     }
     public function add(string $key,$data)
     {
         $_SESSION[$key] = $data;
     }
-    public function get(string $key)
-    
-    {
+    public function get(string $key){
         return isset($_SESSION[$key]);
     }
 
@@ -22,8 +23,7 @@ class Session
         return isset($_SESSION['user']);
     }
 
-    public function asRole ($role)
-    {
+    public function asRole ($role){
         return $_SESSION['user']['role'] == $role ? true : false;
     }
 }
