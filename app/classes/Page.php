@@ -25,26 +25,34 @@ class Page
     }
 
     public function insert(string $table_name, array $data){
-
-        if ($table_name === 'user') {
-            $sql = 'INSERT INTO ' . $table_name . ' (EMAIL, PASSWORD, ROLE) VALUES (:email, :password, :role)';
-            $sth = $this->link->prepare($sql);
-            $sth->execute($data);
-        } else {
-           
-        }
+        $sql = 'INSERT INTO ' . $table_name . ' (email,password,role) VALUES (:email, :password, :role)';
+        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+        $sth->execute($data);
     }
 
-    public function getUserByEmail(array $data){
-        $sql = "SELECT * FROM user WHERE EMAIL = :email";
+
+    public function GetUserByEmail(array $data){
+        $sql = "SELECT * FROM users WHERE email= :email";
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
 
         return $sth->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function GetUserInterventions(array $data){//recup toutes les interventions d'un user
+        $sql = "SELECT intervention.IDI, intervention.NOM, intervention.DATE FROM intervention, intervient, user WHERE intervention.IDI=intervient.IDI AND intervient.IDU= :idu";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
+    }
+
+
+
+
     public function render(string $name, array $data) :string
     {
         return $this->twig->render($name, $data);
     }
 }
+

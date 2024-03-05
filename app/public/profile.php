@@ -15,7 +15,23 @@ if(!$session->isConnected()){
     header("Location: login.php");
     exit();
 }
+else{
+    $user = $_SESSION['user'];
+    
+    $idu = $user['IDU'];
+
+    $data = [
+        ':idu' => $idu,
+    ];
+
+    $listeIntervention = $page->GetUserInterventions($data);
+    //foreach($listeIntervention as $intervention){
+    
+}
+
+
 
 echo $page->render('profile.html.twig',[
-    'msg' => $msg
+    'msg' => $msg,
+    'listeIntervention' => $listeIntervention
 ]);
