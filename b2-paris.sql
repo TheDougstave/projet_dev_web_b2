@@ -3,13 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 05 mars 2024 à 13:57
+-- Généré le : mar. 05 mars 2024 à 14:48
 -- Version du serveur : 8.1.0
 -- Version de PHP : 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
 
 --
 -- Base de données : `b2-paris`
@@ -73,6 +74,49 @@ INSERT INTO `intervient` (`IDI`, `IDU`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE IF NOT EXISTS `role` (
+  `NUM` int NOT NULL,
+  `AFFECTATION` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `role`
+--
+
+INSERT INTO `role` (`NUM`, `AFFECTATION`) VALUES
+(1, 'Client'),
+(2, 'Intervenant'),
+(3, 'Standardiste'),
+(4, 'Admin');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `statut`
+--
+
+DROP TABLE IF EXISTS `statut`;
+CREATE TABLE IF NOT EXISTS `statut` (
+  `NUM` int NOT NULL,
+  `ETAT` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `statut`
+--
+
+INSERT INTO `statut` (`NUM`, `ETAT`) VALUES
+(1, 'Non-commencé'),
+(2, 'En cours'),
+(3, 'Terminé');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `user`
 --
 
@@ -92,9 +136,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`IDU`, `EMAIL`, `PASSWORD`, `ROLE`, `CREATED_AT`, `MODIFIED_AT`) VALUES
-(1, 'BB@theShire.me', 'THEringISmine', 1, '2024-03-05 13:49:53', '2024-03-05 13:49:53'),
-(2, 'theG@MiddleEarth.me', 'GANDALFtheGREAT', 1, '2024-03-05 13:49:53', '2024-03-05 13:49:53'),
-(3, 'froBO@theShire.me', 'theRIIING', 1, '2024-03-05 13:49:53', '2024-03-05 13:49:53'),
-(4, 'Legolas@elf.me', 'ElvesAreGOAT', 2, '2024-03-05 13:53:22', '2024-03-05 13:53:22'),
-(5, 'TheGREATGimli@mm.me', 'IMayHaveEgoButICanBackItUp', 2, '2024-03-05 13:53:22', '2024-03-05 13:53:22');
+(1, 'BB@theShire.me', '$2y$10$d6TzdAOM3Bzg05xGdw2uQuu.GE9jD30FADVE4KLfFABlQOlwat9Hm', 1, '2024-03-05 13:49:53', '2024-03-05 14:47:48'),
+(2, 'theG@MiddleEarth.me', '$2y$10$d6TzdAOM3Bzg05xGdw2uQuu.GE9jD30FADVE4KLfFABlQOlwat9Hm', 1, '2024-03-05 13:49:53', '2024-03-05 14:47:55'),
+(3, 'froBO@theShire.me', '$2y$10$d6TzdAOM3Bzg05xGdw2uQuu.GE9jD30FADVE4KLfFABlQOlwat9Hm', 1, '2024-03-05 13:49:53', '2024-03-05 14:47:59'),
+(4, 'Legolas@elf.me', '$2y$10$d6TzdAOM3Bzg05xGdw2uQuu.GE9jD30FADVE4KLfFABlQOlwat9Hm', 2, '2024-03-05 13:53:22', '2024-03-05 14:48:05'),
+(5, 'TheGREATGimli@mm.me', '$2y$10$d6TzdAOM3Bzg05xGdw2uQuu.GE9jD30FADVE4KLfFABlQOlwat9Hm', 2, '2024-03-05 13:53:22', '2024-03-05 14:48:11');
 COMMIT;
