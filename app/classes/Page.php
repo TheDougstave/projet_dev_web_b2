@@ -32,7 +32,7 @@ class Page
 
 
     public function GetUserByEmail(array $data){
-        $sql = "SELECT * FROM users WHERE email= :email";
+        $sql = "SELECT * FROM user WHERE email= :email";
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
 
