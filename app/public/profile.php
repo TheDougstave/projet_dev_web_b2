@@ -16,6 +16,6 @@ if(!$session->isConnected()){
     exit();
 }
 
-echo $page->render('profil.html.twig',[
+echo $page->render('profile.html.twig',[
     'msg' => $msg
 ]);
