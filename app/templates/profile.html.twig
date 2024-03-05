@@ -1,0 +1,47 @@
+{% extends "base_auth.html.twig" %}
+{% block title %}
+    <div class="overlay">
+      <header>
+        <!--logo-->
+        <div style="width: 180px; height: 180px; position: relative; border-radius: 30px;">
+          <div class="blob" style="left: 95.57px; top: 85.65px;"></div><!-- milieu-->
+          <div class="blob" style="left: 95.55px; top: 122.36px;"></div><!-- en bas-->
+          <div class="blob" style="left: 127.98px; top: 85.65px;"></div><!-- a droite -->
+          <div class="blob" style="left: 95.57px; top: 48.45px;"></div><!-- en haut-->
+          <div class="blob" style="left: 62.90px; top: 84.62px;"></div><!-- a gauche -->
+          <div class="blob" style="left: 112.11px; top: 67.39px;"></div><!-- en haut, a droite-->
+          <div class="blob" style="left: 78.65px; top: 66.33px;"></div><!-- en haut, a gauche-->
+          <div class="blob" style="left: 112.11px; top: 104.59px;"></div><!-- en bas, a droite-->
+          <div class="blob" style="left: 78.65px; top: 104.59px;"></div><!-- en bas, a gauche-->
+          <h class="vertical-center" style="left: 167px">ACCORD<br>ENERGIE</h>
+          <div class="vertical-center separation"></div>
+          <h class="vertical-center" style="left: 350px; color: lightgrey; font-size: 48px; font-family: Jost; font-weight: 500; word-wrap: break-word">Interventions</h>
+        </div>
+    </header><br><br><br><br><br>
+    <div class="overlayInter" style="margin: 20px; padding: 20px;">
+    {% for inter in listeIntervention %}
+        <section class="row" style="margin: 15px;">
+          <div class="blockInter">
+            <div class="col-md-2 interEtiquetteNom">
+              <p>{{inter['id']}}</p>
+            </div>
+            <div class="col-md-3 interTitres">
+              <p>Intervenants</p>
+            </div>
+            <div class="col-md-4 interTitres">
+              <p>Type d'interventions</p>
+            </div>
+            <div class="col-md-2 interTitres">
+              <p>Date et Heure</p>
+            </div>
+          </div>
+      </section>
+      {% endfor %}
+      </div>
+    </div>
+{% endblock %}
+
+   
+
+
+
