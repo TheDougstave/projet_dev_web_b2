@@ -25,14 +25,18 @@ class Page
     }
 
     public function insert(string $table_name, array $data){
-        $sql = 'INSERT INTO ' . $table_name . ' (email,password,role) VALUES (:email, :password, :role)';
-        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
-        $sth->execute($data);
+
+        if ($table_name === 'user') {
+            $sql = 'INSERT INTO ' . $table_name . ' (EMAIL, PASSWORD, ROLE) VALUES (:email, :password, :role)';
+            $sth = $this->link->prepare($sql);
+            $sth->execute($data);
+        } else {
+           
+        }
     }
 
-
-    public function GetUserByEmail(array $data){
-        $sql = "SELECT * FROM users WHERE email= :email";
+    public function getUserByEmail(array $data){
+        $sql = "SELECT * FROM user WHERE EMAIL = :email";
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
 
@@ -44,4 +48,3 @@ class Page
         return $this->twig->render($name, $data);
     }
 }
-
