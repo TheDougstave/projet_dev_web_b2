@@ -14,7 +14,7 @@ if(isset($_POST['send'])){
 
     
 
-    if (!$user){$msg = "email ou mot de passe incorrect !";} 
+    if (!$user){$msg = "Email ou mot de passe incorrect !";} 
     else {
         if (!password_verify($_POST['password'], $user['PASSWORD'])){
             $msg = "mauvais mot de passe ";

@@ -47,7 +47,16 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
     }
 
-
+    public function userExistsByEmail(string $email): bool
+    {
+        $sql = "SELECT COUNT(*) FROM user WHERE email = :email";
+        $sth = $this->link->prepare($sql);
+        $sth->execute(['email' => $email]);
+        $count = $sth->fetchColumn();
+    
+        return ($count > 0); // Retourne vrai si l'utilisateur existe déjà, sinon faux
+    }
+    
 
 
     public function render(string $name, array $data) :string

@@ -4,12 +4,17 @@ require_once '../vendor/autoload.php';
 use App\Page;
 
 $page = new Page();
+$msg = ''; // Initialisez la variable de message d'erreur à une chaîne vide
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $EMAIL = $_POST["email"];
     $PASSWORD = $_POST["password"];
     $confirmPassword = $_POST["confirmPassword"];
 
+// Vérifie si l'utilisateur existe déjà
+if ($page->userExistsByEmail($EMAIL)) {
+    $msg = "Cet email est déjà utilisé. Veuillez utiliser un autre email.";
+} else {
     if (!empty($EMAIL) && !empty($PASSWORD) && !empty($confirmPassword)) {
         if ($PASSWORD === $confirmPassword) {
             $userData = [
@@ -18,17 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 'role' => 1
             ];
 
-            
             $page->insert('user', $userData);
 
-            echo "Inscription réussie!";
+            $msg = "Inscription réussie!";
         } else {
-            echo "Les mots de passe ne correspondent pas.";
+            $msg = "Les mots de passe ne correspondent pas.";
         }
     } else {
-        echo "Veuillez remplir tous les champs.";
+        $msg = "Veuillez remplir tous les champs.";
+        }
     }
 }
-
-echo $page->render('register.html.twig', []);
+echo $page->render('register.html.twig', ['msg' => $msg]); // Transmettez le message d'erreur au modèle Twig
 ?>

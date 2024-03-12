@@ -27,6 +27,11 @@
 			  	<div class="blockP">Confirmer le mot de passe</div>
 			  	<input type="password" name="confirmPassword" id="confirmPassword" required="required" class="blockEntree"><br><br>
 			  	<center><input type="submit" name="send" value="envoyer" class="bP"></center>
+ 		</form>
+            
+            {% if msg %}
+                <p style="color: red;">{{ msg }}</p>
+            {% endif %}
 
 				<a href="index.php">Déjà un compte 	
 		</div>
