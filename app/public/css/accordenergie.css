@@ -124,6 +124,13 @@ header{
 	border-radius: 35px;
 }
 
+.blockEnregistrement4{
+	width: 1310px;
+	height: 183px;
+	background: white;
+	border-radius: 35px
+}
+
 .blockContenu{
 	padding-top: 5%;
 	padding-left: 15%;
