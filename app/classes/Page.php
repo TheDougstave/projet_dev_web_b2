@@ -40,7 +40,16 @@ class Page
     }
 
     public function GetUserInterventions(array $data){//recup toutes les interventions d'un user
-        $sql = "SELECT intervention.IDI, intervention.NOM, intervention.DATE FROM intervention, intervient, user WHERE intervention.IDI=intervient.IDI AND intervient.IDU= :idu";
+        //$sql = "SELECT req.EMAIL as NOM_CLIENT, req2.EMAIL as INTERVENANT, req.IDI FROM (SELECT EMAIL, `user`.IDU, IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Client') as req, (SELECT EMAIL,`user`.IDU,IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Intervenant') as req2 WHERE req.IDI=req2.IDI AND req.IDU= :idu";
+        $sql = "SELECT `user`.EMAIL,intervention.IDI,intervention.NOM,intervention.DATE FROM `intervention`,`intervient`, `user` WHERE intervention.IDI=intervient.IDI AND intervient.IDU=`user`.IDU AND ROLE=1 AND `user`.IDU= :idu;";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
+    }
+
+    public function GetIntervenantsFromIntervention(array $data){//recup toutes les interventions d'un user
+        $sql = "SELECT req.EMAIL as NOM_CLIENT, req2.EMAIL, req.IDI FROM (SELECT EMAIL, `user`.IDU, IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Client') as req, (SELECT EMAIL,`user`.IDU,IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Intervenant') as req2 WHERE req.IDI=req2.IDI AND req.IDU= :idu";
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
 

@@ -25,7 +25,11 @@ else{
     ];
 
     $listeIntervention = $page->GetUserInterventions($data);
-    //foreach($listeIntervention as $intervention){
+    $listeIntervenants=[];
+    foreach($listeIntervention as $inter) {
+        $listeIntervenants[$inter['IDI']] = $page->GetIntervenantsFromIntervention($data);
+    }
+
     
 }
 
@@ -33,5 +37,6 @@ else{
 
 echo $page->render('profile.html.twig',[
     'msg' => $msg,
-    'listeIntervention' => $listeIntervention
+    'listeIntervention' => $listeIntervention,
+    'listeIntervenants' => $listeIntervenants
 ]);
