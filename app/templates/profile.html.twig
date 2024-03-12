@@ -23,16 +23,22 @@
         <section class="row" style="margin: 15px;">
           <div class="blockInter">
             <div class="col-md-2 interEtiquetteNom">
-              <p>{{inter['id']}}</p>
+              <p>Nom</p>
+              <p>{{inter['EMAIL']}}</p>
             </div>
             <div class="col-md-3 interTitres">
               <p>Intervenants</p>
+              {% for intervenant in listeIntervenants[inter['IDI']] %}
+                <p>{{ intervenant['EMAIL'] }}</p>
+              {% endfor %}
             </div>
             <div class="col-md-4 interTitres">
               <p>Type d'interventions</p>
+              <p>{{ inter.NOM }}</p>
             </div>
             <div class="col-md-2 interTitres">
               <p>Date et Heure</p>
+              <p>{{ inter.DATE }}</p>
             </div>
           </div>
       </section>
