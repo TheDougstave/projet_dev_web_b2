@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="AccordEnergie.css">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Reem Kufi&family=Rubik&family=Varela Round&family=Jost:wght@400;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <title>Affectation user</title>
-</head>
-
+{% extends "base_auth.html.twig" %}
+{% block title %}
 <body style="background: url('https://wallpapers.com/images/hd/new-york-city-night-iphone-zfu8yaa5fw3vvk0z.jpg');">
   <div class="overlay">
       <header>
@@ -33,17 +20,37 @@
           </div>
       </header><br><br><br><br>
 
-      <section style="padding: 50px;">
-        <div class="blockEnregistrement4" style="left: 65px; top: 191px;">
-          <p class="texteAjout" style="left: 121px; top: 235px;">Nom:</p>
+      <section style="margin: 50px;">
+        <div class="row affect" style="left: 65px; top: 191px;">
+          <div class="col-md-6" style="top: 30px; left: 30px;">
+            <p class="texteAjout">Nom:</p>
+          </div>
+          <div class="col-md-6" style="top: 30px">
+            <form>
+            <fieldset class="texteAjout">
+              <legend class="texteAjout">Rôle:</legend>
+              <div>
+                <input type="radio" id="1" name="role" value="client" />
+                <label for="1">Client</label>
 
-          <p class="texteAjout" style="left: 783px; top: 235px;">Rôle actuel:</p>
+                <input type="radio" id="2" name="role" value="intervenant" />
+                <label for="2">Intervenant</label>
 
-          <p class="texteAjout" style="left: 121px; top: 302px;">Rôle:</p>
-          <input type="text" id="role" name="role" class="blockEntree2_1" style="width: 763px; height: 42px; left: 190px; top: 294px;">
-          <button class="bP" style="width: 348px; height: 42px; left: 982px; top: 295px;position:absolute; padding-left: 18px;">Modifier</button>
+                <input type="radio" id="3" name="role" value="standardiste" />
+                <label for="3">Standardiste</label>
+
+                <input type="radio" id="4" name="role" value="admin" />
+                <label for="4">Admin</label>
+              </div>
+              <div>
+                <button class="bP" style="top: 95px; width: 348px; height: 42px; position:absolute; padding-left: 18px;">Modifier</button>
+              </div>
+              
+            </fieldset>
+          </form>
+          </div>
         </div>
       </section>
   </div>
 </body>
-</html>
+{% endblock %}
