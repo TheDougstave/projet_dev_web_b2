@@ -1,6 +1,8 @@
 {% extends "base_auth.html.twig" %}
 {% block title %}
+
 <link rel="stylesheet" type="text/css" href="css/affectation.css">
+
 <body style="background: url('https://wallpapers.com/images/hd/new-york-city-night-iphone-zfu8yaa5fw3vvk0z.jpg');">
   <div class="overlay">
       <header>
@@ -21,37 +23,84 @@
           </div>
       </header><br><br><br><br>
 
-      <section style="margin: 50px;">
-        <div class="row affect" style="left: 65px; top: 191px;">
-          <div class="col-md-6" style="top: 30px; left: 30px;">
-            <p class="texteAjout">Nom:</p>
-          </div>
-          <div class="col-md-6" style="top: 30px">
-            <form>
-            <fieldset class="texteAjout">
-              <legend class="texteAjout">Rôle:</legend>
-              <div>
-                <input type="radio" id="1" name="role" value="client" />
-                <label for="1">Client</label>
-
-                <input type="radio" id="2" name="role" value="intervenant" />
-                <label for="2">Intervenant</label>
-
-                <input type="radio" id="3" name="role" value="standardiste" />
-                <label for="3">Standardiste</label>
-
-                <input type="radio" id="4" name="role" value="admin" />
-                <label for="4">Admin</label>
+      <section class="row" style="margin: 50px;">
+        <div class="col-md-2 menu">
+          <a href="register.php">Ajouter membre</a>
+          <a href="affectation.php">Affectation role</a>
+          <a href="accueil.php">Interventions</a>
+          <a href="ajout.php">Ajouter intervention</a>
+        </div>
+        <div class="col-md-10">
+          <section>
+            <div class="row affect" style="left: 65px; top: 191px;">
+              <div class="col-md-6" style="top: 20px; left: 30px;">
+                <p class="info">Email:</p>
               </div>
-              <div>
-                <button class="bP" style="top: 95px; width: 348px; height: 42px; position:absolute; padding-left: 18px;">Modifier</button>
+              <div class="col-md-6" style="top: 20px">
+                <form>
+                  <fieldset>
+                    <legend class="info">Rôle:</legend>
+                    <div>
+                      <input type="radio" id="1" name="role" value="client" />
+                      <label for="1">Client</label>
+
+                      <input type="radio" id="2" name="role" value="intervenant" />
+                      <label for="2">Intervenant</label>
+
+                      <input type="radio" id="3" name="role" value="standardiste" />
+                      <label for="3">Standardiste</label>
+
+                      <input type="radio" id="4" name="role" value="admin" />
+                      <label for="4">Admin</label>
+                    </div>
+                    <div>
+                      <button type="submit" class="bP" style="top: 95px; width: 348px; height: 42px; position:absolute; padding-left: 18px;">Modifier</button>
+                    </div>
+                    
+                  </fieldset>
+                </form>
               </div>
-              
-            </fieldset>
-          </form>
-          </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="row affect" style="left: 65px; top: 191px;">
+              <div class="col-md-6" style="top: 20px; left: 30px;">
+                <p class="info">Email:</p>
+              </div>
+              <div class="col-md-6" style="top: 20px">
+                <form>
+                <fieldset class="texteAjout">
+                  <legend class="texteAjout">Rôle:</legend>
+                  <div>
+                    <input type="radio" id="1" name="role" value="client" />
+                    <label for="1">Client</label>
+
+                    <input type="radio" id="2" name="role" value="intervenant" />
+                    <label for="2">Intervenant</label>
+
+                    <input type="radio" id="3" name="role" value="standardiste" />
+                    <label for="3">Standardiste</label>
+
+                    <input type="radio" id="4" name="role" value="admin" />
+                    <label for="4">Admin</label>
+                  </div>
+                  <div>
+                    <button type="submit" class="bP" style="top: 95px; width: 348px; height: 42px; position:absolute; padding-left: 18px;">Modifier</button>
+                  </div>
+                  
+                </fieldset>
+              </form>
+              </div>
+            </div>
+          </section>
         </div>
       </section>
+
+        </div>
+      </section>
+
+
   </div>
 </body>
 {% endblock %}

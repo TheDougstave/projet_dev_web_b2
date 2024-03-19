@@ -27,3 +27,7 @@ else{
     
     
 }
+
+echo $page->render('show.html.twig',[
+  
+]);

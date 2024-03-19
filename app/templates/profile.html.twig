@@ -18,36 +18,46 @@
           <h class="vertical-center" style="left: 350px; color: lightgrey; font-size: 48px; font-family: Jost; font-weight: 500; word-wrap: break-word">Interventions</h>
         </div>
     </header><br><br><br><br><br>
-    <div class="overlayInter" style="margin: 20px; padding: 20px;">
-    {% for inter in listeIntervention %}
-        <section class="row" style="margin: 15px;">
-          <div class="blockInter">
-            <div class="col-md-2 interEtiquetteNom">
-              <p>Nom</p>
-              <p>{{inter['EMAIL']}}</p>
+
+    <section class="row" style="margin: 15px;">
+        <div class="col-md-2 menu">
+          <a href="register.php">Ajouter membre</a>
+          <a href="affectation.php">Affectation role</a>
+          <a href="accueil.php">Interventions</a>
+          <a href="ajout.php">Ajouter intervention</a>
+        </div>
+        <div class="col-md-10">
+          <section class="row overlayInter" style="min-height: 180px;">
+            <div class="legende">
+              <div class="col-md-2"><p>Nom</p></div>
+              <div class="col-md-3"><p>Intervenants</p></div>
+              <div class="col-md-4"><p>Type d'interventions</p></div>
+              <div class="col-md-2"><p>Date et Heure</p></div>
             </div>
-            <div class="col-md-3 interTitres">
-              <p>Intervenants</p>
-              {% for intervenant in listeIntervenants[inter['IDI']] %}
-                <p>{{ intervenant['EMAIL'] }}</p>
+
+            {% for inter in listeIntervention %}
+            <section class="row intervention" style="margin: 15px;">
+                  <div class="col-md-2">
+                    <p>{{inter['EMAIL']}}</p>
+                  </div>
+                  <div class="col-md-3">
+                    {% for intervenant in listeIntervenants[inter['IDI']] %}
+                      <p>{{ intervenant['EMAIL'] }}</p>
+                    {% endfor %}
+                  </div>
+                  <div class="col-md-4">
+                    <p>{{ inter.NOM }}</p>
+                  </div>
+                  <div class="col-md-2">
+                    <p>{{ inter.DATE }}</p>
+                  </div>
+              </section>
               {% endfor %}
-            </div>
-            <div class="col-md-4 interTitres">
-              <p>Type d'interventions</p>
-              <p>{{ inter.NOM }}</p>
-            </div>
-            <div class="col-md-2 interTitres">
-              <p>Date et Heure</p>
-              <p>{{ inter.DATE }}</p>
-            </div>
-          </div>
-      </section>
-      {% endfor %}
-      </div>
-    </div>
+
+          </section>
+        </div>
+    </section>
+  </div>
 {% endblock %}
-
-   
-
 
 
