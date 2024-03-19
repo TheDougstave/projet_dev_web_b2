@@ -67,12 +67,29 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
     }
 
+    public function GetIntervention(array $data){//recup toutes l'intervention avec :idi
+        
+        $sql = "SELECT `user`.EMAIL,intervention.IDI,intervention.NOM,intervention.DATE,intervention.DETAIL,intervention.STATUT,intervention.ADRESSE,intervention.URGENCE FROM `intervention`, `user` WHERE intervention.IDI= :idi";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+
+        return $sth->fetch(\PDO::FETCH_ASSOC);
+    }
+
     public function GetIntervenantsFromIntervention(array $data){//recup toutes les interventions d'un user
         $sql = "SELECT req.EMAIL as NOM_CLIENT, req2.EMAIL, req.IDI FROM (SELECT EMAIL, `user`.IDU, IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Client') as req, (SELECT EMAIL,`user`.IDU,IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Intervenant') as req2 WHERE req.IDI=req2.IDI AND req.IDU= :idu";
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
 
         return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
+    }
+
+    public function GetIntervenantsFromInterventionIDI($data){
+        $sql = "SELECT user.EMAIL FROM user,intervient WHERE intervient.IDI= :idi AND user.IDU = intervient.IDU AND user.ROLE = 2";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getMaxIDI() {//permet juste de recup l'idi de la derneiere intervention ajouté

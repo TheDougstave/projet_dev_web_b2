@@ -16,18 +16,18 @@ if(!$session->isConnected() || !isset($_GET["idi"])){
 }
 else{
     $user = $_SESSION['user'];
+    $idu = $user['IDU']; //faudra modif pour que sa deco si il a pas acces
     
-    $idu = $user['IDU'];
+    $idi = $_GET['idi'];
 
-    $data = [
-        ':idu' => $idu,
-    ];
-
-
+    $data = [':idi' => $idi];
+    $info_base_inter = $page->GetIntervention($data);
     
+    $intervenants = $page->GetIntervenantsFromInterventionIDI($data);
     
 }
 
 echo $page->render('show.html.twig',[
-  
+  'info_base_inter' => $info_base_inter,
+  'intervenants' => $intervenants,
 ]);

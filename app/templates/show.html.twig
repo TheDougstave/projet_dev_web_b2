@@ -22,19 +22,34 @@
 	    	<section class="row" style="margin: 15px;">
 	    		<div class="blockInter2">
 	    			<div class="interEtiquette">
-	    				<p class="texte" style="left: 40px; top: 10px;">Nom:</p>
+	    				<p class="texte" style="left: 40px; top: 10px;">Email:<br>
+							{{info_base_inter.EMAIL}}
+						</p>
 	    				<div class="ligne" style="left: 290px; top: 10px;"></div>
-	    				<p class="texte" style="left: 311px; top: 10px;">Intervenants:</p>
+	    				<p class="texte" style="left: 311px; top: 10px;">Intervenants:<br>
+							{% for intervenant in intervenants %}
+                          		{{ intervenant.EMAIL }}
+								<br>
+                        	{% endfor %}
+						</p>
 	    				<div class="ligne" style="left: 612px; top: 10px;"></div>
-	    				<p class="texte" style="left: 629px; top: 10px;">Type d’intervention:</p>
+	    				<p class="texte" style="left: 629px; top: 10px;">Type d’intervention:<br>
+							{{info_base_inter.NOM}}
+						</p>
 	    				<div class="ligne" style="left: 987px; top: 10px;"></div>
-	    				<p class="texte" style="left: 1000px; top: 10px;">Date & heure:</p>
-
+							
+						
+	    				<p class="texte" style="left: 1000px; top: 10px;">Date & heure: <br>
+							{{info_base_inter.DATE}}
+						</p>
 	    			</div>
 	    			<div class="ligne2" style="left: 612px;top: 152px;"></div>
-	    			<p class="texte" style="left: 40px; top: 142px; color:#5E5A5A;">Email:</p>
-	    			<p class="texte" style="left: 629px; top: 142px; color:#5E5A5A;">Détails:</p>
-	    			<p class="texte" style="left: 40px; top: 342px; color:#5E5A5A;">Adresse de l'intervention:</p>
+	    			<p class="texte" style="left: 40px; top: 142px; color:#5E5A5A;">Adresse de l'intervention:<br>
+						{{info_base_inter.ADRESSE}}
+					</p>
+	    			<p class="texte" style="left: 629px; top: 142px; color:#5E5A5A;">Détails:<br>
+						{{info_base_inter.DETAIL}}
+					</p>
 
 	    			<div class="blockTache" style="top: 600px">
 	    				<p class="texte" style="left: 40px; top: 10px">Status:</p>
@@ -43,14 +58,26 @@
 	    	</section>
 	    </div>
 
-	      <p class="texte" style="left: 100px; top: 880px;color:#5E5A5A;">A faire</p>
-		  <p class="texte" style="left: 280px; top: 880px;color:#5E5A5A;">En cours</p>
-		  <p class="texte" style="left: 510px; top: 880px;color:#5E5A5A;">Fait</p>
+	      
 
-	      	<div class="statusConteneur"></div>
-	      	<div class="statusLigne" style="left: 322px; top: 919px"></div>
-			<div class="statusLigne" style="left: 529px; top: 919px;"></div>
-			<div class="statusLigne" style="left: 127px; top: 919px;"></div>
-			<div class="statusBoule"></div>
+	    <div class="statusConteneur"></div>
+		<div class="statusLigne" style="left: 322px; top: 919px"></div>
+		<div class="statusLigne" style="left: 529px; top: 919px;"></div>
+		<div class="statusLigne" style="left: 127px; top: 919px;"></div>
+		<p class="texte" style="left: 100px; top: 880px;color:#5E5A5A;">A faire</p>
+		<p class="texte" style="left: 280px; top: 880px;color:#5E5A5A;">En cours</p>
+		<p class="texte" style="left: 510px; top: 880px;color:#5E5A5A;">Fait</p>
+			{% if info_base_inter.STATUT == 0 %}
+				<div class="statusBoule"></div>
+			{% endif %}
+			{% if info_base_inter.STATUT == 1 %}
+				<div class="statusBoule" style="left:95px; width:255px; background-color:orange"></div>
+				<div class="statusBoule" style="left:287.5px"></div>
+			{% endif %}
+			{% if info_base_inter.STATUT == 2 %}
+			<div class="statusBoule" style="left:95px; width:463px; background-color:lime"></div>
+				<div class="statusBoule" style="left:495px"></div>
+			{% endif %}
+		
 	</div>
 {% endblock %}
