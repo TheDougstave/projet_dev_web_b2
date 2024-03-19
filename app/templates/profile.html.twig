@@ -8,7 +8,7 @@
           <div class="blob" style="left: 95.57px; top: 85.65px;"></div><!-- milieu-->
           <div class="blob" style="left: 95.55px; top: 122.36px;"></div><!-- en bas-->
           <div class="blob" style="left: 127.98px; top: 85.65px;"></div><!-- a droite -->
-          <div class="blob" style="left: 95.57px; top: 48.45px;"></div><!-- en haut-->
+          <div class="blob" style="left: 95.57px; top: 48.45px;"></div><!-- en hau'-->
           <div class="blob" style="left: 62.90px; top: 84.62px;"></div><!-- a gauche -->
           <div class="blob" style="left: 112.11px; top: 67.39px;"></div><!-- en haut, a droite-->
           <div class="blob" style="left: 78.65px; top: 66.33px;"></div><!-- en haut, a gauche-->
@@ -21,12 +21,32 @@
     </header><br><br><br><br><br>
     <section class="row" style="margin: 15px;">
         <div class="col-md-2 menu">
+        {% if role == "Standardiste" %}
+
+        
+          <a href="profile.php">Interventions</a>
+          <a href="CreerIntervention.php">Ajouter intervention</a>
+          <a href="deconnexion.php">Deconnexion</a>
+        {% endif %}        
+        {% if role == "Client" %}
+        
+          <a href="profile.php">Interventions</a>
+         
+          <a href="deconnexion.php">Deconnexion</a>
+        {% endif %}
+                {% if role == "Admin" %}
           <a href="register.php">Ajouter membre</a>
           <a href="affectation.php">Affectation role</a>
           <a href="profile.php">Interventions</a>
-          <a href="ajout.php">Ajouter intervention</a>
+          <a href="CreerIntervention.php">Ajouter intervention</a>
           <a href="deconnexion.php">Deconnexion</a>
+        {% endif %}
+                {% if role == "Intervenant" %}
 
+          <a href="profile.php">Interventions</a>
+
+          <a href="deconnexion.php">Deconnexion</a>
+        {% endif %}
         </div>
         <div class="col-md-10">
           <section class="row overlayInter" style="min-height: 180px;">

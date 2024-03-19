@@ -81,6 +81,16 @@ class Page
         $result = $sth->fetch(\PDO::FETCH_ASSOC);
         return $result['idi'];
     }
+
+    public function getRole(array $data){
+        $sql = "SELECT AFFECTATION FROM role, user WHERE role.NUM = user.ROLE AND user.IDU = :idu";
+        //$sql = "SELECT ROLE FROM user WHERE IDU= :idu";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+
+        $result = $sth->fetch(\PDO::FETCH_ASSOC);
+        return $result['AFFECTATION'];
+    }
     
 
 
