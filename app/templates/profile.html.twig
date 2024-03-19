@@ -37,22 +37,24 @@
             </div>
 
             {% for inter in listeIntervention %}
-            <section class="row intervention" style="margin: 15px;">
-                  <div class="col-md-2">
-                    <p>{{inter['EMAIL']}}</p>
-                  </div>
-                  <div class="col-md-3">
-                    {% for intervenant in listeIntervenants[inter['IDI']] %}
-                      <p>{{ intervenant['EMAIL'] }}</p>
-                    {% endfor %}
-                  </div>
-                  <div class="col-md-4">
-                    <p>{{ inter.NOM }}</p>
-                  </div>
-                  <div class="col-md-2">
-                    <p>{{ inter.DATE }}</p>
-                  </div>
-              </section>
+              <a href="show.html">
+                <section class="row intervention" style="margin: 15px;">
+                      <div class="col-md-2">
+                        <p>{{inter['EMAIL']}}</p>
+                      </div>
+                      <div class="col-md-3">
+                        {% for intervenant in listeIntervenants[inter['IDI']] %}
+                          <p>{{ intervenant['EMAIL'] }}</p>
+                        {% endfor %}
+                      </div>
+                      <div class="col-md-4">
+                        <p>{{ inter.NOM }}</p>
+                      </div>
+                      <div class="col-md-2">
+                        <p>{{ inter.DATE }}</p>
+                      </div>
+                  </section>
+              </a>
               {% endfor %}
 
           </section>
