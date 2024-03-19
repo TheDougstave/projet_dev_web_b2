@@ -1,0 +1,19 @@
+.legende{
+	width: 100%;
+	height: 35px;
+	font-size: 20px;
+	font-family: Jost;
+	font-weight: 500;
+	color: black;
+	background-color: white;
+}
+
+.intervention{
+	color: white;
+	border-bottom: solid 1px white;
+}
+
+.intervention:hover{
+	opacity: 0.5;
+	transition: 0.5s;
+}
