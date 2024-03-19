@@ -51,6 +51,13 @@ class Page
         return $sth->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function userExistsByEmail($EMAIL){
+        $sql = "SELECT * FROM user WHERE email= :email";
+        $sth = $this->link->prepare($sql);
+        $sth->execute(array(':email' => $EMAIL));
+        return $sth->fetch(\PDO::FETCH_ASSOC) !== false;
+    }
+
     public function GetUserInterventions(array $data){//recup toutes les interventions d'un user
         //$sql = "SELECT req.EMAIL as NOM_CLIENT, req2.EMAIL as INTERVENANT, req.IDI FROM (SELECT EMAIL, `user`.IDU, IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Client') as req, (SELECT EMAIL,`user`.IDU,IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Intervenant') as req2 WHERE req.IDI=req2.IDI AND req.IDU= :idu";
         $sql = "SELECT `user`.EMAIL,intervention.IDI,intervention.NOM,intervention.DATE FROM `intervention`,`intervient`, `user` WHERE intervention.IDI=intervient.IDI AND intervient.IDU=`user`.IDU AND ROLE=1 AND `user`.IDU= :idu;";
