@@ -19,18 +19,15 @@ else{
     $user = $_SESSION['user'];
     
     $idu = $user['IDU'];
+    $email = $user['EMAIL'];
 
-    $data = [
-        ':idu' => $idu,
-    ];
-
+    $data = [':idu' => $idu];
     $listeIntervention = $page->GetUserInterventions($data);
     $listeIntervenants=[];
     foreach($listeIntervention as $inter) {
         $listeIntervenants[$inter['IDI']] = $page->GetIntervenantsFromIntervention($data);
     }
 
-    
 }
 
 
