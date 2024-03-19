@@ -37,8 +37,8 @@ class Page
     }
 
     public function insertIntervient(array $data){
-        $sql = 'INSERT INTO intervient(IDI,IDU) VALUES( :idi , :idu ) ';
-        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+        $sql = 'INSERT INTO intervient(IDI,IDU) VALUES (:idi ,:idu) ';
+        $sth = $this->link->prepare($sql);
         $sth->execute($data);
     }
 

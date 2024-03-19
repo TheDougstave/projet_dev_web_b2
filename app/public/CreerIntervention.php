@@ -18,21 +18,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $URGENCE = 1;
     $STATUT = 1;
     
-    $data = [
-        ':date' => $DATE,
-        ':detail' => $DETAIL,
-        ':nom' => $NOM,
-        ':adresse' => $ADRESSE,
-        ':urgence' => $URGENCE,
-        ':statut' => $STATUT
-    ];
-    $page->insertIntervention($data);
-    $idi = $page->getMaxIDI();
+
     $data = [':email' =>$EMAIL];
     $user = $page->GetUserByEmail($data);
-    $idu = $user['IDU'];
-    $data = [':idi' => $idi, ':idu' =>$idu];
-    $page->insertIntervient($data);
+    if($user!=NULL){
+        $idu = $user['IDU'];
+        $data = [
+            ':date' => $DATE,
+            ':detail' => $DETAIL,
+            ':nom' => $NOM,
+            ':adresse' => $ADRESSE,
+            ':urgence' => $URGENCE,
+            ':statut' => $STATUT
+        ];
+        $page->insertIntervention($data);
+        $idi = $page->getMaxIDI();
+        $data = [':idi' => $idi, ':idu' =>$idu];
+        $page->insertIntervient($data);
+    }
+    else{
+        $msg = "L'Email est attaché à aucun compte.";
+    }
 }
 
 // Rendu de la page avec Twig
@@ -46,3 +52,4 @@ if (isset($connexion) && !$connexion) {
 }
 
 ?>
+
