@@ -7,43 +7,32 @@ use App\Page;
 $page = new Page();
 $msg = false;
 
+
 // Vérification formulaire soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupération des données du formulaire
-    $EMAIL= $_POST['email'];
-    $DATE = $_POST['date'];
-    $DETAIL = $_POST['detail'];
-    $NOM = $_POST['nom'];
-    $ADRESSE = $_POST['adresse'];
-    $INTERVENANT = $_POST['intervenant'];
-
+if ($_SERVER["REQUEST_METHOD"] == "POST") {            
+    $NOM = $_POST['nom']; // Vous pouvez ajouter une validation du nom si nécessaire
+    $DATE = $_POST['date']; // Vous pouvez ajouter une validation de date si nécessaire
+    $EMAIL = $_POST['email'];
+    $DETAIL = $_POST['detail']; // Vous pouvez ajouter une validation du détail si nécessaire
+    $ADRESSE = $_POST['adresse']; // Vous pouvez ajouter une validation de l'adresse si nécessaire
+    $URGENCE = 1;
+    $STATUT = 1;
     
-    $connexion = mysqli_connect('localhost:8080', 'root', '', 'b2-paris');
-
-    // Vérification de la connexion
-    if (!$connexion) {
-        die("Erreur de connexion à la base de données : " . mysqli_connect_error());
-    }
-
-    // Préparation de la requête SQL
-    $query = "INSERT INTO intervention (email, date, detail, nom, adresse, intervenant) 
-              VALUES ('$EMAIL', '$DATE', '$DETAIL', '$NOM', '$ADRESSE', '$INTERVENANT')";
-
-    // Exécution de la requête SQL
-    $result = mysqli_query($connexion, $query);
-
-    // Vérification de l'exécution de la requête
-    if ($result) {
-        $msg = "L'intervention a été créée avec succès.";
-    } else {
-        $msg = "Erreur lors de la création de l'intervention : " . mysqli_error($connexion);
-    }
-
-    // Fermeture de la connexion à la base de données
-    mysqli_close($connexion);
-} else {
-    // Si le formulaire n'a pas été soumis, afficher un message d'erreur
-    echo "Le formulaire n'a pas été soumis.";
+    $data = [
+        ':date' => $DATE,
+        ':detail' => $DETAIL,
+        ':nom' => $NOM,
+        ':adresse' => $ADRESSE,
+        ':urgence' => $URGENCE,
+        ':statut' => $STATUT
+    ];
+    $page->insertIntervention($data);
+    $idi = $page->getMaxIDI();
+    $data = [':email' =>$EMAIL];
+    $user = $page->GetUserByEmail($data);
+    $idu = $user['IDU'];
+    $data = [':idi' => $idi, ':idu' =>$idu];
+    $page->insertIntervient($data);
 }
 
 // Rendu de la page avec Twig
@@ -51,6 +40,9 @@ echo $page->render('CreerIntervention.html.twig', [
     'msg' => $msg
 ]);
 
+// Gestion des erreurs de connexion à la base de données
+if (isset($connexion) && !$connexion) {
+    die("Erreur de connexion à la base de données : " . $connexion->errorInfo());
+}
+
 ?>
-
-
