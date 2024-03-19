@@ -12,3 +12,8 @@
 	color: white;
 	border-bottom: solid 1px white;
 }
+
+.intervention:hover{
+	opacity: 0.5;
+	transition: 0.5s;
+}
