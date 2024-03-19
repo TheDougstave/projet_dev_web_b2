@@ -30,6 +30,18 @@ class Page
         $sth->execute($data);
     }
 
+    public function insertIntervention(array $data){
+        $sql = 'INSERT INTO intervention (DATE, DETAIL, NOM, ADRESSE, URGENCE, STATUT) VALUES (:date, :detail, :nom, :adresse, :urgence, :statut)';
+        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+        $sth->execute($data);
+    }
+
+    public function insertIntervient(array $data){
+        $sql = 'INSERT INTO intervient(IDI,IDU) VALUES( :idi , :idu ) ';
+        $sth = $this->link->prepare($sql, [\PDO::ATTR_CURSOR => \PDO::CURSOR_FWDONLY]);
+        $sth->execute($data);
+    }
+
 
     public function GetUserByEmail(array $data){
         $sql = "SELECT * FROM user WHERE email= :email";
@@ -56,6 +68,13 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
     }
 
+    public function getMaxIDI() {//permet juste de recup l'idi de la derneiere intervention ajouté
+        $sql = 'SELECT MAX(IDI) as idi FROM intervention';
+        $sth = $this->link->query($sql);
+        $result = $sth->fetch(\PDO::FETCH_ASSOC);
+        return $result['idi'];
+    }
+    
 
 
 
