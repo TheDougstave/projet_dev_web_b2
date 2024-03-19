@@ -24,4 +24,3 @@ else{
 echo $page->render('affectation.html.twig',[
   
 ]);
-
