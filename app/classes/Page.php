@@ -64,7 +64,7 @@ class Page
         FROM `intervention`, `intervient`, `user` 
         WHERE intervention.IDI = intervient.IDI 
             AND intervient.IDU = `user`.IDU 
-            AND (ROLE = 1 OR ROLE = 2) 
+            AND (ROLE = 1 OR ROLE=2) 
             AND (`user`.IDU = :idu)";
 
         
@@ -74,13 +74,44 @@ class Page
         return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
     }
 
-    public function GetIntervention(array $data){//recup toutes l'intervention avec :idi
+    public function GetListInterventions(array $data){//recup toutes les interventions d'un user
+        //$sql = "SELECT req.EMAIL as NOM_CLIENT, req2.EMAIL as INTERVENANT, req.IDI FROM (SELECT EMAIL, `user`.IDU, IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Client') as req, (SELECT EMAIL,`user`.IDU,IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Intervenant') as req2 WHERE req.IDI=req2.IDI AND req.IDU= :idu";
+        $sql = "SELECT intervention.IDI
+        FROM `intervention`, `intervient`, `user` 
+        WHERE intervention.IDI = intervient.IDI 
+            AND intervient.IDU = `user`.IDU 
+            AND (`user`.IDU = :idu)";
+
         
-        $sql = "SELECT `user`.EMAIL,intervention.IDI,intervention.NOM,intervention.DATE,intervention.DETAIL,intervention.STATUT,intervention.ADRESSE,intervention.URGENCE FROM `intervention`, `user` WHERE intervention.IDI= :idi";
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
 
-        return $sth->fetch(\PDO::FETCH_ASSOC);
+        return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
+    }
+
+    public function GetInterventionJustIDI(){
+        $sql = "SELECT intervention.IDI FROM intervention";
+        $sth = $this->link->query($sql);
+
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function GetIntervention(array $data){//recup toutes l'intervention avec :idi
+        
+        $sql = "SELECT intervention.IDI,intervention.NOM,intervention.DATE,intervention.DETAIL,intervention.STATUT,intervention.ADRESSE,intervention.URGENCE 
+        FROM `intervention`,intervient, `user` 
+        WHERE intervention.IDI= :idi AND (intervient.IDU=`user`.IDU OR ROLE=3) ";
+
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+        $resultat = $sth->fetch(\PDO::FETCH_ASSOC);
+        
+        $sql = "SELECT user.EMAIL FROM user,intervention,intervient WHERE user.IDU=intervient.IDU AND intervient.IDI= :idi AND ROLE=1";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+        $resultat2 = $sth->fetch(\PDO::FETCH_ASSOC);
+        return $resultat+ $resultat2;
+
     }
 
     public function GetIntervenantsFromIntervention(array $data){//recup toutes les interventions d'un user
@@ -90,6 +121,8 @@ class Page
 
         return $sth->fetchAll(\PDO::FETCH_ASSOC); //on fait un fetchAll pour fetch tout ce qu'il y a dans la requete (si on fait un simple fetch on aura que la première valeur)
     }
+
+
 
     public function GetIntervenantsFromInterventionIDI($data){
         $sql = "SELECT user.EMAIL FROM user,intervient WHERE intervient.IDI= :idi AND user.IDU = intervient.IDU AND user.ROLE = 2";
@@ -125,7 +158,7 @@ class Page
     }
 
     public function getAllUsers(){
-        $sql = "SELECT * FROM user WHERE ROLE=1 OR ROLE=2 OR ROLE=3";
+        $sql = "SELECT * FROM user";
         $sth = $this->link->query($sql);
 
         return $sth->fetchAll(\PDO::FETCH_ASSOC);
@@ -139,6 +172,21 @@ class Page
         $sth->execute();
     }
 
+    public function deleteIntervention($data){
+        $sql = "DELETE FROM intervention WHERE IDI = :idi";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+        $sql = "DELETE FROM intervient WHERE IDI = :idi";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+    }
+
+    public function getStatutAndUrgence($data){
+        $sql = "SELECT STATUT,URGENCE FROM intervention WHERE idi=:idi";
+        $sth = $this->link->prepare($sql);
+        $sth->execute($data);
+        $result = $sth->fetch(\PDO::FETCH_ASSOC);
+    }
 
     public function render(string $name, array $data) :string
     {

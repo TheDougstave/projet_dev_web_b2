@@ -22,13 +22,22 @@ else{
     $email = $user['EMAIL'];
 
     $data = [':idu' => $idu];
-    $listeIntervention = $page->GetUserInterventions($data);
+    $role = $page->getRole($data);
+    if($role == "Standardiste" || $role == "Admin"){
+        $listeInterventionancien = $page->GetInterventionJustIDI();
+    }
+    else{
+        $listeInterventionancien = $page->GetListInterventions($data);
+    }
     $listeIntervenants=[];
-    foreach($listeIntervention as $inter) {
-        $listeIntervenants[$inter['IDI']] = $page->GetIntervenantsFromIntervention($data);
+    $listeIntervention = [];
+    foreach($listeInterventionancien as $inter) {
+        $data = [':idi' => $inter['IDI']];
+        $listeIntervention[$inter['IDI']] = $page->getIntervention($data);
+        $listeIntervenants[$inter['IDI']] = $page->GetIntervenantsFromInterventionIDI($data);
     }
     $data = [':idu' => $idu];
-    $role = $page->getRole($data);
+    
     
 }
 

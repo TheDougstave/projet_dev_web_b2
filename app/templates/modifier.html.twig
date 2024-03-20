@@ -1,45 +1,4 @@
 
-{# <title>Créer une intervention</title>
-</head>
-<body>
-    <h2>Nouvelle intervention</h2>
-    <form action="CreerIntervention.php" method="post">
-        <div>
-            <label for="nom">Nom :</label><br>
-            <input type="text" id="nom" name="nom" required>
-        </div>
-        <div>
-            <label for="adresse">Adresse :</label><br>
-            <input type="text" id="adresse" name="adresse" required>
-        </div>
-        <div>
-            <label for="email">Email :</label><br>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="date">Date :</label><br>
-            <input type="date" id="date" name="date" required>
-        </div>
-        <div>
-            <label for="heure">Heure :</label><br>
-            <input type="time" id="heure" name="heure" required>
-        </div>
-        <div>
-            <label for="type">Type d'intervention :</label><br>
-            <input type="text" id="type" name="type">
-        </div>
-        <div>
-            <label for="detail">Détail :</label><br>
-            <textarea id="detail" name="detail"></textarea>
-        </div>
-        <div>
-            <label for="intervenant">Intervenant :</label><br>
-            <input type="text" id="intervenant" name="intervenant">
-        </div>
-         
-    </form>
- #}
-
 {% extends "base_auth.html.twig" %}
 {% block title %}
 	<div class="overlay">
@@ -63,34 +22,37 @@
 			</a>
 	    </header><br><br><br><br>
 	    <div class="overlayInter" style="margin: 20px; padding: 20px;">
-            <form method="POST" action="CreerIntervention.php">
+            <form method="POST" action="modifier.php?idi={{ idi }}">
 	    	<section class="row" style="margin: 15px;">
 	    		<div class="blockInter2">
 	    			<div class="interEtiquette">
 	    				<p class="texte" style="left: 40px; top: 10px;">Email:<br>
-							<input type="email" id="email" name="email" required>
+							<input type="email" id="email" name="email" required value="{{info_base_inter.EMAIL}}">
 						</p>
 	    				<div class="ligne" style="left: 290px; top: 10px;"></div>
 	    				<p class="texte" style="left: 311px; top: 10px;">Intervenants:<br>
-							<textarea id="detail" name="intervenant"></textarea>
+							<textarea id="detail" name="intervenant">{% for intervenant in intervenants %}{{ intervenant.EMAIL }} {% endfor %}
+                            </textarea>
 						</p>
 	    				<div class="ligne" style="left: 612px; top: 10px;"></div>
 	    				<p class="texte" style="left: 629px; top: 10px;">Type d’intervention:<br>
-							<input type="text" id="nom" name="nom" required>
+							<input type="text" id="nom" name="nom" required value="{{info_base_inter.NOM}}">
 						</p>
 	    				<div class="ligne" style="left: 987px; top: 10px;"></div>
 							
 						
 	    				<p class="texte" style="left: 1000px; top: 10px;">Date & heure: <br>
-							<input type="date" id="date" name="date" required>
+							<input type="date" id="date" name="date" required value="{{info_base_inter.DATE}}">
 						</p>
 	    			</div>
 	    			<div class="ligne2" style="left: 612px;top: 152px;"></div>
 	    			<p class="texte" style="left: 40px; top: 142px; color:#5E5A5A;">Adresse de l'intervention:<br>
-						<input type="text" id="adresse" name="adresse" required>
+						<input type="text" id="adresse" name="adresse" required value="{{info_base_inter.ADRESSE}}">
+                        <input type="text" id="statut" name="statut" required value="{{info_base_inter.STATUT}}" hidden>
+                        <input type="text" id="urgence" name="urgence" required value="{{info_base_inter.URGENCE}}" hidden>
 					</p>
 	    			<p class="texte" style="left: 629px; top: 142px; color:#5E5A5A;">Détails:<br>
-						<textarea id="detail" name="detail"></textarea>
+						<textarea id="detail" name="detail" >{{info_base_inter.DETAIL}}</textarea>
 					</p>
 	    		</div>
 	    	</section>
