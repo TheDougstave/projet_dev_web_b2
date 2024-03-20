@@ -17,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ADRESSE = $_POST['adresse']; // Vous pouvez ajouter une validation de l'adresse si nécessaire
     $URGENCE = 1;
     $STATUT = 1;
-    
+    $INTERVENANTS = $_POST['intervenant'];
+    $INTERVENANTS = preg_split('/\s+/', $INTERVENANTS, -1, PREG_SPLIT_NO_EMPTY);
 
     $data = [':email' =>$EMAIL];
     $user = $page->GetUserByEmail($data);
@@ -35,6 +36,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $idi = $page->getMaxIDI();
         $data = [':idi' => $idi, ':idu' =>$idu];
         $page->insertIntervient($data);
+
+        foreach($INTERVENANTS as $intervenant){
+            $data = [':email' => $intervenant,];
+            $user = $page->GetUserByEmail($data); 
+            if($user!=NULL){
+                $idu = $user['IDU'];
+                $data = [':idu' => $idu, ':idi' => $idi];
+                $page->insertIntervient($data);
+            }
+        }
     }
     else{
         $msg = "L'Email est attaché à aucun compte.";

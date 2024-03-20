@@ -22,8 +22,6 @@
     <section class="row" style="margin: 15px;">
         <div class="col-md-2 menu">
         {% if role == "Standardiste" %}
-
-        
           <a href="profile.php">Interventions</a>
           <a href="CreerIntervention.php">Ajouter intervention</a>
           <a href="deconnexion.php">Deconnexion</a>
@@ -56,28 +54,27 @@
               <div class="col-md-4"><p>Type d'interventions</p></div>
               <div class="col-md-2"><p>Date et Heure</p></div>
             </div>
-
-            {% for inter in listeIntervention %}
-               <a href='show.php?idi={{ inter['IDI'] }}'>
-                <section class="row intervention" style="margin: 15px;">
-                      <div class="col-md-2">
-                        <p>{{inter['EMAIL']}}</p>
-                      </div>
-                      <div class="col-md-3">
-                        {% for intervenant in listeIntervenants[inter['IDI']] %}
-                          <p>{{ intervenant['EMAIL'] }}</p>
-                        {% endfor %}
-                      </div>
-                      <div class="col-md-4">
-                        <p>{{ inter.NOM }}</p>
-                      </div>
-                      <div class="col-md-2">
-                        <p>{{ inter.DATE }}</p>
-                      </div>
-                  </section>
-              </a>
-              {% endfor %}
-
+            
+              {% for inter in listeIntervention %}
+                <a href='show.php?idi={{ inter['IDI'] }}'>
+                  <section class="row intervention" style="margin: 15px;">
+                        <div class="col-md-2">
+                          <p>{{inter['EMAIL']}}</p>
+                        </div>
+                        <div class="col-md-3">
+                          {% for intervenant in listeIntervenants[inter['IDI']] %}
+                            <p>{{ intervenant['EMAIL'] }}</p>
+                          {% endfor %}
+                        </div>
+                        <div class="col-md-4">
+                          <p>{{ inter.NOM }}</p>
+                        </div>
+                        <div class="col-md-2">
+                          <p>{{ inter.DATE }}</p>
+                        </div>
+                    </section>
+                </a>
+                {% endfor %}
           </section>
         </div>
     </section>

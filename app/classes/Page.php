@@ -60,7 +60,14 @@ class Page
 
     public function GetUserInterventions(array $data){//recup toutes les interventions d'un user
         //$sql = "SELECT req.EMAIL as NOM_CLIENT, req2.EMAIL as INTERVENANT, req.IDI FROM (SELECT EMAIL, `user`.IDU, IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Client') as req, (SELECT EMAIL,`user`.IDU,IDI FROM `intervient`,`user`,`role` WHERE intervient.IDU=`user`.IDU AND `user`.role=role.NUM AND role.AFFECTATION='Intervenant') as req2 WHERE req.IDI=req2.IDI AND req.IDU= :idu";
-        $sql = "SELECT `user`.EMAIL,intervention.IDI,intervention.NOM,intervention.DATE FROM `intervention`,`intervient`, `user` WHERE intervention.IDI=intervient.IDI AND intervient.IDU=`user`.IDU AND ROLE=1 AND `user`.IDU= :idu;";
+        $sql = "SELECT `user`.EMAIL, intervention.IDI, intervention.NOM, intervention.DATE 
+        FROM `intervention`, `intervient`, `user` 
+        WHERE intervention.IDI = intervient.IDI 
+            AND intervient.IDU = `user`.IDU 
+            AND (ROLE = 1 OR ROLE = 2) 
+            AND (`user`.IDU = :idu)";
+
+        
         $sth = $this->link->prepare($sql);
         $sth->execute($data);
 
@@ -109,7 +116,28 @@ class Page
         return $result['AFFECTATION'];
     }
     
+    public function modifierStatut($etat, $idi){
+        $sql = 'UPDATE intervention SET STATUT=(SELECT NUM FROM statut WHERE ETAT=:etat) WHERE IDI=:idi ';
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':etat', $etat, \PDO::PARAM_STR);
+        $sth->bindParam(':idi', $idi, \PDO::PARAM_INT);
+        $sth->execute();
+    }
 
+    public function getAllUsers(){
+        $sql = "SELECT * FROM user WHERE ROLE=1 OR ROLE=2 OR ROLE=3";
+        $sth = $this->link->query($sql);
+
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function modifierRole($role, $idu){
+        $sql = 'UPDATE user SET ROLE=(SELECT NUM FROM role WHERE AFFECTATION=:role) WHERE IDU=:idu ';
+        $sth = $this->link->prepare($sql);
+        $sth->bindParam(':role', $role, \PDO::PARAM_STR);
+        $sth->bindParam(':idu', $idu, \PDO::PARAM_INT);
+        $sth->execute();
+    }
 
 
     public function render(string $name, array $data) :string

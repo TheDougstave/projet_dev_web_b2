@@ -31,26 +31,29 @@
           <a href="ajout.php">Ajouter intervention</a>
         </div>
         <div class="col-md-10">
+          {% for user in users %}
           <section>
             <div class="row affect" style="left: 65px; top: 191px;">
               <div class="col-md-6" style="top: 20px; left: 30px;">
-                <p class="info">Email:</p>
+                <p class="info">Email: <br>
+                  {{ user.EMAIL }}
+                </p>
               </div>
               <div class="col-md-6" style="top: 20px">
-                <form>
+                <form method="POST" action='affectation.php?idu={{ user.IDU }}'>
                   <fieldset>
                     <legend class="info">Rôle:</legend>
                     <div>
-                      <input type="radio" id="1" name="role" value="client" />
+                      <input type="radio" id="1" name="role" value="client" {% if user.ROLE == 1 %} checked{% endif %} />
                       <label for="1">Client</label>
 
-                      <input type="radio" id="2" name="role" value="intervenant" />
+                      <input type="radio" id="2" name="role" value="intervenant" {% if user.ROLE == 2 %} checked{% endif %}/>
                       <label for="2">Intervenant</label>
 
-                      <input type="radio" id="3" name="role" value="standardiste" />
+                      <input type="radio" id="3" name="role" value="standardiste" {% if user.ROLE == 3 %} checked{% endif %}/>
                       <label for="3">Standardiste</label>
 
-                      <input type="radio" id="4" name="role" value="admin" />
+                      <input type="radio" id="4" name="role" value="admin" {% if user.ROLE == 4 %} checked{% endif %}/>
                       <label for="4">Admin</label>
                     </div>
                     <div>
@@ -62,38 +65,7 @@
               </div>
             </div>
           </section>
-
-          <section>
-            <div class="row affect" style="left: 65px; top: 191px;">
-              <div class="col-md-6" style="top: 20px; left: 30px;">
-                <p class="info">Email:</p>
-              </div>
-              <div class="col-md-6" style="top: 20px">
-                <form>
-                <fieldset class="texteAjout">
-                  <legend class="texteAjout">Rôle:</legend>
-                  <div>
-                    <input type="radio" id="1" name="role" value="client" />
-                    <label for="1">Client</label>
-
-                    <input type="radio" id="2" name="role" value="intervenant" />
-                    <label for="2">Intervenant</label>
-
-                    <input type="radio" id="3" name="role" value="standardiste" />
-                    <label for="3">Standardiste</label>
-
-                    <input type="radio" id="4" name="role" value="admin" />
-                    <label for="4">Admin</label>
-                  </div>
-                  <div>
-                    <button type="submit" class="bP" style="top: 95px; width: 348px; height: 42px; position:absolute; padding-left: 18px;">Modifier</button>
-                  </div>
-                  
-                </fieldset>
-              </form>
-              </div>
-            </div>
-          </section>
+          {% endfor %}
         </div>
       </section>
 
